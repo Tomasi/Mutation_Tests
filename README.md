@@ -1,8 +1,12 @@
 # Mutation_Tests
 Primeiramente  pegamos um projeto que ja tinhamos usados para fazer os testes unitarios.
 
+Link do onedrive  com um video com explicação com o passo a passo do teste de mutação
+https://1drv.ms/v/s!AsMFpzmd1T2Tg_FHAdyY8LR6kg5HZQ?e=377iiX
+
 
 Comando para iniciar ele:
+
 donet stryker
 Depois que ele rodar ele vai criar um arquivo que vai ser o resultado do teste de mutação.
 de 31 mutações no nosso projeto 26 reprovaram, o cenario ideal seriam 31.

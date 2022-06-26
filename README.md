@@ -1,22 +1,17 @@
-# Mutation_Tests
-Primeiramente  pegamos um projeto que ja tinhamos usados para fazer os testes unitarios.
+# Teste de Mutação com Stryker C#
 
-Link do onedrive  com um video com explicação com o passo a passo do teste de mutação
+Primeiramente pegamos um projeto com testes unitários desenvolvidos.
+
+Passa a passo feito para o teste de mutação (vídeo gravado e updado no OneDrive).
 https://1drv.ms/v/s!AsMFpzmd1T2Tg_FHAdyY8LR6kg5HZQ?e=377iiX
 
+Comando de inicialização da análise, após configuração do ambiente.
 
-Comando para iniciar ele:
+* donet stryker
 
-donet stryker
-Depois que ele rodar ele vai criar um arquivo que vai ser o resultado do teste de mutação.
-de 31 mutações no nosso projeto 26 reprovaram, o cenario ideal seriam 31.
-Ai gente pode ir no brownser com o link que ele da do resultado, 
-temos 3 filtros para ver que são que as que foram mortas pelo teste as que sobreviveral e sem cobertura.
-A gente tem que olhar as que sobreviveram para corrigir em cima delas.
+Após a ferramenta aplicar mutação no código fonte, o mesmo gera automáticamente um arquivo para análise dos resultados. Em nosso exemplo, foi realizado 31 mutações no projeto e 26 "sobreviveram", algo que não deveria acontecer, sendo o cenario ideal nenhum teste unitário sobreviver, análisando os resultados dos testes, iniciamos então a correção para avitar que tal cenário prejudique o teste unitário.
 
-
-1°-Caso ele alterando a condição para menor ou igual a zero, essa função é feita para que o valor que for passado para o 
-depositAmount nao seja negativo.
+1° Mutação: Alteração para condição que testava "< 0", a alteração feita com a ferramenta para "<= 0" fez com que ainda sim o teste unitário sobrevivesse.
 
 if antigo:
 
@@ -24,11 +19,11 @@ if (amount < 0){
       throw new ArgumentOutOfRangeException(nameof(amount), amount, DebitAmountExceedsBalanceMessage);
   }
 
-Ai vamos nesse metodo, e criamos uma variavel 
+Solução: Criamos uma variável 
 
 zeroValue = 0;
 
-e mudamos o if para 
+e mudamos a condição para
 
 if(Math.Max(zeroValue, amout) == zeroValue){
       throw new ArgumentOutOfRangeException(nameof(amount), amount, DebitAmountExceedsBalanceMessage);
@@ -36,7 +31,7 @@ if(Math.Max(zeroValue, amout) == zeroValue){
 
 isso vai nos dar o mesmo resultado porem nao tera um problema mesmo com a mutação.
 
-2° -Caso No metodo debit
+2° Caso No metodo debit
 
 aqui ele verifica se o meu valor no debito é maior que eu tenho saldo entao nao pode ser feito o debito,
 então fazemos praticamente a mesma coisa no 1° caso, criamos uma variavel e mudamos o modo de como ele verifica o caso.

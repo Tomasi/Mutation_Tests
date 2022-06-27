@@ -16,7 +16,7 @@ https://1drv.ms/v/s!AsMFpzmd1T2Tg_FHAdyY8LR6kg5HZQ?e=377iiX
 
 ### Funcionamento da Ferramenta
 
-Após a ferramenta aplicar mutação no código fonte, o mesmo gera automáticamente um arquivo para análise dos resultados. Em nosso exemplo, foi realizado 31 mutações no projeto e 26 "sobreviveram", algo que não deveria acontecer, sendo o cenário ideal todos os testes unitários reprovarem. Análisando os resultados dos testes, iniciamos então a correção para avitar que tal cenário prejudique os testes unitários.
+Após a ferramenta aplicar mutação no código fonte, o mesmo gera automáticamente um arquivo para análise dos resultados. Em nosso exemplo, foi realizado 31 mutações no projeto e 26 "sobreviveram", algo que não deveria acontecer, sendo o cenário ideal todos os testes unitários reprovarem. Análisandos os resultados dos testes de mutação, podemos verificar quais alterações geradas fizeram os testes unitários sobreviverem.
 
 ### 1º Mutação
 

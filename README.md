@@ -1,106 +1,49 @@
 # Teste de Mutação com Stryker C#
 
-Primeiramente pegamos um projeto com testes unitários desenvolvidos.
+Trabalho desenvolvido em dupla
+Alunos: Igor Tomasi e Khauê Souza
 
-Passa a passo feito para o teste de mutação (vídeo gravado e updado no OneDrive).
+## Stryker
+
+A ferramenta Stryker apresenta suporte para as linguagens C# e JavaScript, oferecendo possibilidade de aplicar testes de mutação para seu código fonte, permitindo testar temporariamente seu código fontes, aplicando bugs temporários.
+
+## Passo a Passo
+
+### Link do vídeo gravado com *aplicação prática*.
+
 https://1drv.ms/v/s!AsMFpzmd1T2Tg_FHAdyY8LR6kg5HZQ?e=377iiX
 
-Comando de inicialização da análise, após configuração do ambiente.
+### Funcionamento da Ferramenta
 
-* donet stryker
+Após a ferramenta aplicar mutação no código fonte, o mesmo gera automáticamente um arquivo para análise dos resultados. Em nosso exemplo, foi realizado 31 mutações no projeto e 26 "sobreviveram", algo que não deveria acontecer, sendo o cenário ideal todos os testes unitários reprovarem. Análisando os resultados dos testes, iniciamos então a correção para avitar que tal cenário prejudique os testes unitários.
 
-Após a ferramenta aplicar mutação no código fonte, o mesmo gera automáticamente um arquivo para análise dos resultados. Em nosso exemplo, foi realizado 31 mutações no projeto e 26 "sobreviveram", algo que não deveria acontecer, sendo o cenario ideal nenhum teste unitário sobreviver, análisando os resultados dos testes, iniciamos então a correção para avitar que tal cenário prejudique o teste unitário.
+### 1º Mutação
 
-1° Mutação: Alteração para condição que testava "< 0", a alteração feita com a ferramenta para "<= 0" fez com que ainda sim o teste unitário sobrevivesse.
+![image](https://user-images.githubusercontent.com/61890715/176048202-126231d0-ffd2-48c8-9fe2-8a099518ded4.png)
 
-if antigo:
+### Resolução
 
-if (amount < 0){
-      throw new ArgumentOutOfRangeException(nameof(amount), amount, DebitAmountExceedsBalanceMessage);
-  }
+![image](https://user-images.githubusercontent.com/61890715/176049703-b8be3135-6176-4583-9898-03c930c9e853.png)
 
-Solução: Criamos uma variável 
+### 2º e 3º Mutação
 
-zeroValue = 0;
+![image](https://user-images.githubusercontent.com/61890715/176048457-4e5504cf-a8ff-4b3c-98fe-083b842f344f.png)
 
-e mudamos a condição para
+![image](https://user-images.githubusercontent.com/61890715/176048665-bb332c98-9fd0-4006-ab13-1b5c3ad5ae17.png)
 
-if(Math.Max(zeroValue, amout) == zeroValue){
-      throw new ArgumentOutOfRangeException(nameof(amount), amount, DebitAmountExceedsBalanceMessage);
-  }
+### Resolução
 
-isso vai nos dar o mesmo resultado porem nao tera um problema mesmo com a mutação.
+![image](https://user-images.githubusercontent.com/61890715/176049792-8ab3dd62-5e4e-401c-af98-2e88121d2f7c.png)
 
-2° Caso No metodo debit
+### 4ª e 5ª
 
-aqui ele verifica se o meu valor no debito é maior que eu tenho saldo entao nao pode ser feito o debito,
-então fazemos praticamente a mesma coisa no 1° caso, criamos uma variavel e mudamos o modo de como ele verifica o caso.
+![image](https://user-images.githubusercontent.com/61890715/176049019-eae11fba-1401-42a9-bdbf-fba89b063dfe.png)
 
-variavel nova:
+![image](https://user-images.githubusercontent.com/61890715/176049215-89b66c1a-da12-40ee-82d0-9f1f7b4671f6.png)
 
-var maxValue = m_balance;
+## Resolução
 
-if antigo:
+![image](https://user-images.githubusercontent.com/61890715/176049950-9f38fa10-cf1d-42a0-8e7d-c41bcf065a2f.png)
 
-if (amount > m_balance){
-    throw new ArgumentOutOfRangeException(nameof(amount), amount, DebitAmountLessThanZeroMessage);
-}
-
-e mudamos o if para :
-
-if(Math.Max(maxValue, amount) == amount){
-        throw new ArgumentOutOfRangeException(nameof(amount), amount, DebitAmountExceedsBalanceMessage);
-     }
-
-3° -Caso ele ta verificando se o meu debito é menor que zero. fazemos o mesmo passo a passo criamos uma variavel e e mudamos a forma do if tambem.
-
-A variavel criada:
-
-var zeroValue = 0;
-
-o if antigo :
-
-if(amount < 0){
-  throw new ArgumentOutOfRangeException(nameof(amount), amount, DebitAmountLessThanZeroMessage);
-            }
-
-4° -Caso esse é na nosso metodo de credit e vamos corrigir tbm para outra forma nosso if criando uma variavel tbm.
-
-variavel nova:
-
-var zeroValue = 0;
-
-if antigo:
-
-    if (amount < 0)
-    {
-        throw new ArgumentOutOfRangeException(nameof(amount), amount, CreditAmountLessThanZeroMessage);
-    }
-    
-Novo if:
-
-    if (Math.Max(zeroValue, amount) == zeroValue)
-    {
-        throw new ArgumentOutOfRangeException(nameof(amount), amount, CreditAmountLessThanZeroMessage);
-    }
-    
-5°- Caso Se ele é maior que o meu limite de credito e ai ele retorna uma excção da mensagem trow ai vamos defenir outra variavel e mudar o if.
-
-variavel nova: 
-
-var maxLimitValue = m_limitAccount;
-
-if antigo:
-
-     if (amount > m_limitAccount) {
-        throw new ArgumentOutOfRangeException(nameof(amount), amount, CreditAmountExceedsLimitsAccount);
-      }
-if novo:
-
-     if (Math.Max(maxLimitValue, amount) == amount) {
-        throw new ArgumentOutOfRangeException(nameof(amount), amount, CreditAmountExceedsLimitsAccount);
-      }
-
-Depois de corrigirmos os 5 erros rodamos os teste novamente e vemos que funcionou, e rodamos novamente o donet só para confirmar que ele mataria todos os teste.
 
 

@@ -1,6 +1,6 @@
 # Teste de Mutação com Stryker C#
 
-Trabalho desenvolvido em dupla
+Católica de Santa Catarina
 
 Alunos: Igor Tomasi e Khauê Souza
 

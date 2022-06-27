@@ -6,7 +6,7 @@ Alunos: Igor Tomasi e Khauê Souza
 
 ## Stryker
 
-A ferramenta Stryker apresenta suporte para as linguagens C# e JavaScript, oferecendo a possibilidade de aplicar testes de mutação para seu código fonte, permitindo testar temporariamente seu código fontes, aplicando bugs temporários.
+A ferramenta Stryker apresenta suporte para as linguagens C# e JavaScript, oferecendo a possibilidade de aplicar testes de mutação para seu código fonte, permitindo testar temporariamente, aplicando bugs temporários.
 
 ## Passo a Passo
 
